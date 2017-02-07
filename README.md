@@ -24,7 +24,7 @@ but it would have made a difference if i had heard someone stick up for me /
 when i heard it said to me /
 and for that, i need to practice.
 
-i made a SVG of something i used to hear said to me /
+i made a SVG of something people have said to me /
 and i'd pretend not to hear it /
 but these days, if i hear it being said to someone else /
 i hope to be able to speak up and say /
