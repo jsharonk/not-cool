@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>not cool</title>
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>not cool<span class="score">0</span></h1>
+  <button onClick="startGame()">start!</button>
+  <!--<img src="bully.svg">-->
+
+  <div class="game">
+
+    <div class="cloud cloud1">
+      <div class="bully"></div>
+    </div>
+    <div class="cloud cloud2">
+      <div class="bully"></div>
+    </div>
+    <div class="cloud cloud3">
+      <div class="bully"></div>
+    </div>
+    <div class="cloud cloud4">
+      <div class="bully"></div>
+    </div>
+    <div class="cloud cloud5">
+      <div class="bully"></div>
+    </div>
+    <div class="cloud cloud6">
+      <div class="bully"></div>
+    </div>
+  </div>
+
+<script>
+  const clouds = document.querySelectorAll('.cloud');
+  const scoreBoard = document.querySelector('.score');
+  const bullies = document.querySelectorAll('.bully');
+  let lastCloud;
+  let timeUp = false;
+  let score = 0;
+
+  function randomTime(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+  }
+
+  function randomCloud(clouds) {
+    const idx = Math.floor(Math.random() * clouds.length);
+    const cloud = clouds[idx];
+    if (cloud === lastCloud) {
+      return randomCloud(clouds);
+    }
+    lastCloud = cloud;
+    return cloud;
+  }
+
+  function peep() {
+    const time = randomTime(200, 1000);
+    const cloud = randomCloud(clouds);
+    cloud.classList.add('up');
+    setTimeout(() => {
+      cloud.classList.remove('up');
+      if (!timeUp) peep();
+    }, time);
+  }
+
+  function startGame() {
+    scoreBoard.textContent = 0;
+    timeUp = false;
+    score = 0;
+    peep();
+    setTimeout(() => timeUp = true, 10000)
+  }
+
+  function bonk(e) {
+    if(!e.isTrusted) return; // cheater!
+    score++;
+    this.classList.remove('up');
+    scoreBoard.textContent = score;
+  }
+
+  bullies.forEach(bully => bully.addEventListener('click', bonk));
+
+</script>
+</body>
+</html>
